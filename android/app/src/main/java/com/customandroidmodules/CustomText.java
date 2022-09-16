@@ -1,18 +1,19 @@
-package com.demoandroidmodules;
+package com.customandroidmodules;
 
 import androidx.annotation.NonNull;
 
-import android.graphics.Color;
+import android.app.Activity;
+import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.annotations.ReactProp;
 
 public class CustomText extends ReactContextBaseJavaModule {
+
+    private TextView textView;
+    private Activity activity;
     private static ReactApplicationContext reactContext;
 
     CustomText(ReactApplicationContext context) {
@@ -21,26 +22,19 @@ public class CustomText extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void show(){
-        Toast.makeText(reactContext, "-~- Hi, I am Android -~-", Toast.LENGTH_LONG).show();
+    public void setInfoText(String name, String color){
+//        activity.setContentView(R.layout.custom_text_modules);
+//        activity.setContentView(R.layout.custom_text_modules);
+        Log.d("setInfoText.name", name);
+        Log.d("setInfoText.color", color);
+        textView = (TextView)textView.findViewById(R.id.textCustom);
+//        textView.setText(name);
+//        textView.setTextColor(Integer.parseInt(color));
     }
 
     @NonNull
     @Override
     public String getName() {
         return "CustomTextExample";
-    }
-
-    public TextView createViewInstance(ThemedReactContext context){
-        TextView textView = new TextView(context);
-        textView.setTextIsSelectable(true);
-        return textView;
-    }
-
-    @ReactProp(name = "text")
-    public void setTextView(TextView textView, String color) {
-        System.out.println(textView);
-        System.out.println(color);
-        textView.setTextColor(Color.parseColor(color));
     }
 }

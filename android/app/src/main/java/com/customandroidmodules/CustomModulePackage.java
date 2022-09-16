@@ -1,4 +1,4 @@
-package com.demoandroidmodules;
+package com.customandroidmodules;
 
 import androidx.annotation.NonNull;
 

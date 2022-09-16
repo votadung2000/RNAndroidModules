@@ -5,13 +5,20 @@ import CustomModule from './CustomModule';
 
 const App = () => {
 
-  CustomModule.show();
 
   // console.log(CustomModule.handleCustomText("red"))
 
   return (
     <View>
       <Text>App</Text>
+      {/* <CustomModule
+        style={{
+          flex: 1,
+          color: 'red',
+        }}
+        text="red"
+      /> */}
+      {CustomModule.setInfoText("CustomModule", "#ff0000")}
     </View>
   )
 }
