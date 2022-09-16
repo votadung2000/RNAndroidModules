@@ -3,38 +3,47 @@ package com.customandroidmodules;
 import androidx.annotation.NonNull;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.bridge.ReactContextBaseJavaModule;
-import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.uimanager.SimpleViewManager;
+import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.views.text.ReactTextView;
 
-public class CustomText extends ReactContextBaseJavaModule {
-
-    private TextView textView;
+public class CustomText extends SimpleViewManager<ReactTextView> {
+    private ReactTextView textView;
     private Activity activity;
-    private static ReactApplicationContext reactContext;
 
-    CustomText(ReactApplicationContext context) {
-        super(context);
+    ReactApplicationContext reactContext;
+
+    public CustomText(ReactApplicationContext context) {
         reactContext = context;
-    }
-
-    @ReactMethod
-    public void setInfoText(String name, String color){
-//        activity.setContentView(R.layout.custom_text_modules);
-//        activity.setContentView(R.layout.custom_text_modules);
-        Log.d("setInfoText.name", name);
-        Log.d("setInfoText.color", color);
-        textView = (TextView)textView.findViewById(R.id.textCustom);
-//        textView.setText(name);
-//        textView.setTextColor(Integer.parseInt(color));
     }
 
     @NonNull
     @Override
     public String getName() {
         return "CustomTextExample";
+    }
+
+    @NonNull
+    @Override
+    protected ReactTextView createViewInstance(@NonNull ThemedReactContext reactContext) {
+        Log.d("reactContext", String.valueOf(reactContext));
+        textView = new ReactTextView(reactContext);
+        return textView;
+    }
+
+    @ReactProp(name = "context")
+    public void setTextProp(ReactTextView reactTextView, String context) {
+        reactTextView.setText(context);
+    }
+
+    @ReactProp(name = "color")
+    public void setColorText(ReactTextView reactTextView, String color) {
+        reactTextView.setTextColor(Color.parseColor(color));
     }
 }

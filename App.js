@@ -1,28 +1,32 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, requireNativeComponent } from 'react-native';
 
-import CustomModule from './CustomModule';
 
 const App = () => {
 
-
-  // console.log(CustomModule.handleCustomText("red"))
+  let TextCustomModules = requireNativeComponent('CustomTextExample');
 
   return (
     <View>
-      <Text>App</Text>
-      {/* <CustomModule
-        style={{
-          flex: 1,
-          color: 'red',
-        }}
-        text="red"
-      /> */}
-      {CustomModule.setInfoText("CustomModule", "#ff0000")}
+      <TextCustomModules
+        color="#ff0000"
+        context="context test"
+        style={styles.custom}
+      />
+      <TextCustomModules
+        color="#ccffff"
+        context="context test"
+        style={styles.custom}
+      />
     </View>
   )
 }
 
 export default App
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  custom: {
+    width: 400,
+    height: 50,
+  }
+})
